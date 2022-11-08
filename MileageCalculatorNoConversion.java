@@ -102,6 +102,7 @@ public class MileageCalculatorNoConversion extends Application {
         
         // stick default focus in first field for usability
         tfDistance.requestFocus();
+        
     }
     
     /**
@@ -112,37 +113,42 @@ public class MileageCalculatorNoConversion extends Application {
     private void changeLabels() {
     	
     	// distinguish between L/100KM and MPG
-
     	if ((comboBox.getValue() == altResult) && lblCapacity.getText().equals(defaultCapacity)) {
+    		
         	// update labels
         	lblCapacity.setText(altCapacity);
         	lblDistance.setText(altMileage);
-        	lblResult.setText(altResult);       	
+        	lblResult.setText(altResult);   
+        	
          } else {
+        	 
         	// update labels
         	lblCapacity.setText(defaultCapacity);
         	lblDistance.setText(defaultMileage);
         	lblResult.setText(defaultResult);
+        	
         }
     }
     
     /**
      * Calculate expenses based on entered figures
      */
-    private void calcMileage() {       
+    private void calcMileage() {    
+    	
     	// set default values
         double distance = 0.0, capacity = 0.0;
         
         // make sure to get numeric values only
         if (tfCapacity.getText() != null && !tfCapacity.getText().isEmpty()
         		&& tfDistance.getText() != null && !tfDistance.getText().isEmpty()) {
+        	
         	distance = Double.parseDouble(tfDistance.getText());
             capacity = Double.parseDouble(tfCapacity.getText());
+            
         }
 
         // check for type of calculation
         double result = 0.0;
-        
 
         if (comboBox.getValue() == altResult) {
         	// liters / 100KM
@@ -154,12 +160,14 @@ public class MileageCalculatorNoConversion extends Application {
     
 	    // update calculation fields with currency formatting
         tfResult.setText(String.format("%.2f", result));
+        
     }
     
     /**
      * Reset all values in the application
      */
     private void resetForm() {
+    	
         // reset all form fields
         tfDistance.setText(defaultEntry);
         tfCapacity.setText(defaultEntry);
@@ -172,7 +180,9 @@ public class MileageCalculatorNoConversion extends Application {
 	
 	
 	public static void main(String[] args) {
+		
 		launch(args);
+		
 	}
 
 }

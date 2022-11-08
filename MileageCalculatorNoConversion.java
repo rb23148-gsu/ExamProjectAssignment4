@@ -13,9 +13,11 @@
  * 		- Update the event handling to work with the new ComboBox
  * 		- Make sure all changes are finalized in the repo and current with all group members.
  */
+
 package ch16;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -37,6 +39,7 @@ public class MileageCalculatorNoConversion extends Application {
     private String altMileage = "Kilometers";
     private String altCapacity = "Liters";
     private String altResult = "L/100KM";
+    private String[] comboBoxText = {defaultResult, altResult};
     
     // create UI components split by type
     private Button btnCalc = new Button("Calculate");
@@ -51,7 +54,7 @@ public class MileageCalculatorNoConversion extends Application {
     private TextField tfCapacity = new TextField(defaultEntry);
     private TextField tfResult = new TextField(defaultCalc);
     
-    private ComboBox comboBox = new ComboBox();
+    private ComboBox<String> comboBox = new ComboBox<>(FXCollections.observableArrayList(comboBoxText));
     
     private GridPane mainPane = new GridPane();
     
@@ -62,6 +65,7 @@ public class MileageCalculatorNoConversion extends Application {
         tfCapacity.setMaxWidth(txtWidth);
         tfResult.setMaxWidth(txtWidth);
         tfResult.setEditable(false);
+        comboBox.getSelectionModel().selectFirst();
         
         // create a main grid pane to hold items
         mainPane.setPadding(new Insets(10.0));

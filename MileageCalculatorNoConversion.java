@@ -44,9 +44,8 @@ public class MileageCalculatorNoConversion extends Application {
     private TextField tfCapacity = new TextField(defaultEntry);
     private TextField tfResult = new TextField(defaultCalc);
     
-    private RadioButton rbMPG = new RadioButton(defaultResult);
-    private RadioButton rbKPL = new RadioButton(altResult);
-    private ToggleGroup tgConv = new ToggleGroup();
+    //TASK 1: Replace radio buttons with a single combo box.
+    private ComboBox comboBox = new ComboBox();
     
     private GridPane mainPane = new GridPane();
     

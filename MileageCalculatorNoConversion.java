@@ -2,9 +2,16 @@
  * File: csci1302/ch16/MileageCalculator.java
  * Package: ch16
  * @author Christopher Williams
+ * @author Robert Brown
  * Created on: Apr 12, 2017
- * Last Modified: Apr 15, 2019
- * Description:  
+ * Last Modified: Nov 8, 2019
+ * Description:  Make changes to MileageCalculatorNoConversion.java as per
+ * "Exam Practice Assignment 4" instructions:
+ * 
+ * 		- Replace the two RadioButtons with a ComboBox
+ * 		- Populate the ComboBox with appropriate Strings
+ * 		- Update the event handling to work with the new ComboBox
+ * 		- Make sure all changes are finalized in the repo and current with all group members.
  */
 package ch16;
 
@@ -12,14 +19,14 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class MileageCalculatorNoConversion extends Application {
+	
 	// default values/strings
     private double txtWidth = 125.0;
     private String defaultCalc = String.format("%.2f", 0.00);
@@ -44,32 +51,26 @@ public class MileageCalculatorNoConversion extends Application {
     private TextField tfCapacity = new TextField(defaultEntry);
     private TextField tfResult = new TextField(defaultCalc);
     
-    //TASK 1: Replace radio buttons with a single combo box.
     private ComboBox comboBox = new ComboBox();
     
     private GridPane mainPane = new GridPane();
     
-    public void start(Stage primaryStage) {   	
-    	// set toggle group for RadioButtons
-    	rbMPG.setToggleGroup(tgConv);
-    	rbKPL.setToggleGroup(tgConv);
+    public void start(Stage primaryStage) {
     	
         // set preferences for UI components
         tfDistance.setMaxWidth(txtWidth);
         tfCapacity.setMaxWidth(txtWidth);
         tfResult.setMaxWidth(txtWidth);
         tfResult.setEditable(false);
-        rbMPG.setSelected(true);
         
         // create a main grid pane to hold items
         mainPane.setPadding(new Insets(10.0));
         mainPane.setHgap(txtWidth/2.0);
         mainPane.setVgap(txtWidth/12.0);
         
-        // add items to mainPane
+        // add items to mainPane (including ComboBox)
         mainPane.add(lblEffType, 0, 0);
-        mainPane.add(rbMPG, 0, 1);
-        mainPane.add(rbKPL, 1, 1);
+        mainPane.add(comboBox, 0, 1);
         mainPane.add(lblDistance, 0, 2);
         mainPane.add(tfDistance, 1, 2);
         mainPane.add(lblCapacity, 0, 3);
@@ -83,9 +84,7 @@ public class MileageCalculatorNoConversion extends Application {
         btnCalc.setOnAction(e -> calcMileage());
         tfDistance.setOnAction(e -> calcMileage());
         tfCapacity.setOnAction(e -> calcMileage());
-        tfResult.setOnAction(e -> calcMileage());
-        rbKPL.setOnAction(e -> changeLabels());
-        rbMPG.setOnAction(e -> changeLabels());     
+        tfResult.setOnAction(e -> calcMileage());    
         btnReset.setOnAction(e -> resetForm());
         
         // create a scene and place it in the stage
@@ -106,8 +105,10 @@ public class MileageCalculatorNoConversion extends Application {
      * the conversion is not necessary
      */
     private void changeLabels() {
+    	
     	// distinguish between L/100KM and MPG
-    	if (rbKPL.isSelected() && lblCapacity.getText().equals(defaultCapacity)) {
+    	//TODO edit if statement for combobox kpl at "true"
+    	if (true && lblCapacity.getText().equals(defaultCapacity)) {
         	// update labels
         	lblCapacity.setText(altCapacity);
         	lblDistance.setText(altMileage);
@@ -136,7 +137,9 @@ public class MileageCalculatorNoConversion extends Application {
 
         // check for type of calculation
         double result = 0.0;
-        if (rbKPL.isSelected()) {
+        
+        //TODO edit if for combobox in if statement at "true"
+        if (true) {
         	// liters / 100KM
         	result = (distance != 0) ? capacity/(distance/100.0) : 0;
         } else {
@@ -153,7 +156,6 @@ public class MileageCalculatorNoConversion extends Application {
      */
     private void resetForm() {
         // reset all form fields
-    	rbMPG.setSelected(true);
         tfDistance.setText(defaultEntry);
         tfCapacity.setText(defaultEntry);
         tfResult.setText(defaultCalc);
